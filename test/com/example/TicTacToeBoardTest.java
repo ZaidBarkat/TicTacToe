@@ -21,4 +21,16 @@ public class TicTacToeBoardTest {
     TicTacToeBoard board = new TicTacToeBoard("OOOXX.X..");
     assertEquals(Evaluation.Owins, board.evaluate());
   }
+
+  @Test
+  public void testXGreaterThanThree() {
+    TicTacToeBoard board = new TicTacToeBoard("XXXXXXXXX");
+    assertEquals(Evaluation.UnreachableState, board.evaluate());
+  }
+
+  @Test
+  public void testOGreaterThanThree() {
+    TicTacToeBoard board = new TicTacToeBoard("OOOOOOOOO");
+    assertEquals(Evaluation.UnreachableState, board.evaluate());
+  }
 }
