@@ -49,5 +49,21 @@ public class TicTacToeBoardTest {
     TicTacToeBoard board = new TicTacToeBoard("xx.......ooxx");
   }
 
+  @Test
+  public void testValidFourByFourBoardNoWinner() {
+    TicTacToeBoard board = new TicTacToeBoard("O...X.X.........");
+    assertEquals(Evaluation.NoWinner, board.evaluate());
+  }
 
+  @Test
+  public void testValidFourByFourBoardXWins() {
+    TicTacToeBoard board = new TicTacToeBoard("OXXXxO..o.......");
+    assertEquals(Evaluation.Xwins, board.evaluate());
+  }
+
+  @Test
+  public void testValidFourByFourBoardOWins() {
+    TicTacToeBoard board = new TicTacToeBoard("OOOoX.Xx........");
+    assertEquals(Evaluation.Owins, board.evaluate());
+  }
 }
