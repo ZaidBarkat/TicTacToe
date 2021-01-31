@@ -33,4 +33,21 @@ public class TicTacToeBoardTest {
     TicTacToeBoard board = new TicTacToeBoard("OOOOOOOOO");
     assertEquals(Evaluation.UnreachableState, board.evaluate());
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNullBoard() {
+    TicTacToeBoard board = new TicTacToeBoard(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testEmptyString() {
+    TicTacToeBoard board = new TicTacToeBoard("");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNonPerfectSquareString() {
+    TicTacToeBoard board = new TicTacToeBoard("xx.......ooxx");
+  }
+
+
 }
