@@ -5,7 +5,8 @@ package com.example;
  */
 public class TicTacToeBoard {
   /** initial variables */
-  private String board;
+  private char[][] board;
+  private int boardLength;
 
   /**
    * This method should load a string into your TicTacToeBoard class.
@@ -24,7 +25,17 @@ public class TicTacToeBoard {
       throw new IllegalArgumentException();
     }
 
-    board = boardPassed;
+    /** putting characters into two dimensional array */
+    board = new char[(int) boardSquareRoot][(int) boardSquareRoot];
+    int increment = 0;
+    for (int  row = 0; row < board.length; row++) {
+      for (int column = 0; column < board[column].length; column++) {
+        board[row][column] = boardPassed.charAt(increment);
+        increment++;
+      }
+    }
+
+    boardLength = (int) boardSquareRoot;
   }
 
   /**
