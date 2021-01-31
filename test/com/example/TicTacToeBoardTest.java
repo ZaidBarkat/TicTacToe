@@ -66,4 +66,18 @@ public class TicTacToeBoardTest {
     TicTacToeBoard board = new TicTacToeBoard("OOOoX.Xx........");
     assertEquals(Evaluation.Owins, board.evaluate());
   }
+
+  @Test
+  public void testTwoWinners() {
+    TicTacToeBoard board = new TicTacToeBoard("OOOXxX...");
+    assertEquals(Evaluation.UnreachableState, board.evaluate());
+  }
+
+  @Test
+  public void testTwoTurns() {
+    TicTacToeBoard board = new TicTacToeBoard("OOO..X...");
+    assertEquals(Evaluation.UnreachableState, board.evaluate());
+  }
+
+
 }
