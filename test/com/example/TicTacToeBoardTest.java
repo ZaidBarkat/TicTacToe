@@ -12,7 +12,7 @@ public class TicTacToeBoardTest {
 
   @Test
   public void testValidBoardXWins() {
-    TicTacToeBoard board = new TicTacToeBoard("OXXXOO...");
+    TicTacToeBoard board = new TicTacToeBoard("XXXOOO...");
     assertEquals(Evaluation.Xwins, board.evaluate());
   }
 
@@ -57,7 +57,7 @@ public class TicTacToeBoardTest {
 
   @Test
   public void testValidFourByFourBoardXWins() {
-    TicTacToeBoard board = new TicTacToeBoard("OXXXxO..o.......");
+    TicTacToeBoard board = new TicTacToeBoard("XXXXoO..o.......");
     assertEquals(Evaluation.Xwins, board.evaluate());
   }
 

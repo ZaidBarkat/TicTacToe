@@ -29,7 +29,7 @@ public class TicTacToeBoard {
     board = new char[(int) boardSquareRoot][(int) boardSquareRoot];
     int increment = 0;
     for (int  row = 0; row < board.length; row++) {
-      for (int column = 0; column < board[column].length; column++) {
+      for (int column = 0; column < board[row].length; column++) {
         board[row][column] = boardPassed.charAt(increment);
         increment++;
       }
@@ -71,6 +71,19 @@ public class TicTacToeBoard {
       }
       if (d == boardLength - 2) {
         if (board[d][d] == 'x' || board[d][d] == 'X') {
+          return Evaluation.Xwins;
+        } else {
+          return Evaluation.Owins;
+        }
+      }
+    }
+
+    for (int a = 0; a < boardLength - 1; a++) {
+      if (board[a][(boardLength - 1) - a] != board[a + 1][(boardLength - 1) - (a + 1)]) {
+        break;
+      }
+      if (a == boardLength - 2) {
+        if (board[a][(boardLength - 1) - a] == 'x' || board[a][(boardLength - 1) - a] == 'X') {
           return Evaluation.Xwins;
         } else {
           return Evaluation.Owins;
