@@ -111,10 +111,12 @@ public class TicTacToeBoard {
       }
     }
 
+    // checking is player took an extra turn
     if (Math.abs(numberOfOs - numberOfXs) > 1) {
       return Evaluation.UnreachableState;
     }
 
+    // checking if two people won, else if some player had won
     if (xWins && oWins) {
       return Evaluation.UnreachableState;
     } else if (xWins) {
@@ -123,6 +125,7 @@ public class TicTacToeBoard {
       return Evaluation.Owins;
     }
 
+    // if nothing is wrong with the board, than there was no winner
     return Evaluation.NoWinner;
   }
 
