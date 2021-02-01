@@ -37,6 +37,11 @@ public class TicTacToeBoardTest {
     TicTacToeBoard board = new TicTacToeBoard("xx.<..]..ooxx");
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testSmallBoardString() {
+    TicTacToeBoard board = new TicTacToeBoard("x.oX");
+  }
+
   @Test
   public void testValidFourByFourBoardNoWinner() {
     TicTacToeBoard board = new TicTacToeBoard("O...X.X...O...x.");

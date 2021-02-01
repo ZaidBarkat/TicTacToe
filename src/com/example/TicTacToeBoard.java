@@ -14,7 +14,8 @@ public class TicTacToeBoard {
    * @param boardPassed The string representing the board
    */
   public TicTacToeBoard(String boardPassed) {
-    if (boardPassed == null || boardPassed.equals("")) {
+    //checking for illegalArgumentExceptions if there is a problem with the string
+    if (boardPassed == null || boardPassed.equals("") || boardPassed.length() < 9) {
       throw new IllegalArgumentException();
     }
 
