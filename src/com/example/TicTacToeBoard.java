@@ -27,6 +27,7 @@ public class TicTacToeBoard {
     }
 
     // putting characters into two dimensional array
+    boardPassed = boardPassed.toLowerCase();
     board = new char[(int) boardSquareRoot][(int) boardSquareRoot];
     int increment = 0;
     for (int  row = 0; row < board.length; row++) {
@@ -75,9 +76,9 @@ public class TicTacToeBoard {
       }
 
       for (int j = 0; j < boardLength; j++) {
-        if (Character.toLowerCase(board[i][j]) == 'o') {
+        if (board[i][j] == 'o') {
           numberOfOs++;
-        } else if (Character.toLowerCase(board[i][j]) == 'x') {
+        } else if (board[i][j] == 'x') {
           numberOfXs++;
         }
       }
@@ -85,13 +86,15 @@ public class TicTacToeBoard {
 
     // Checks the diagonal for wins
     for (int d = 0; d < boardLength - 1; d++) {
-      if (Character.toLowerCase(board[d][d]) != Character.toLowerCase(board[d + 1][d + 1])) {
+      char spotInDiagonal = board[d][d];
+      char nextInDiagonal = board[d + 1][d + 1];
+      if (spotInDiagonal != nextInDiagonal) {
         break;
       }
       if (d == boardLength - 2) {
-        if (Character.toLowerCase(board[d][d]) == 'x') {
+        if (spotInDiagonal == 'x') {
           xwin = true;
-        } else if (Character.toLowerCase(board[d][d]) == 'o') {
+        } else if (spotInDiagonal == 'o') {
           owin = true;
         }
       }
@@ -99,14 +102,15 @@ public class TicTacToeBoard {
 
     // checks the anti-diagonal for wins
     for (int a = 0; a < boardLength - 1; a++) {
-      if (Character.toLowerCase(board[a][(boardLength - 1) - a])
-              != Character.toLowerCase(board[a + 1][(boardLength - 1) - (a + 1)])) {
+      char spotInAntiDiagonal = board[a][(boardLength - 1) - a];
+      char nextInAntiDiagonal = board[a + 1][(boardLength - 1) - (a + 1)];
+      if (spotInAntiDiagonal != nextInAntiDiagonal) {
         break;
       }
       if (a == boardLength - 2) {
-        if (Character.toLowerCase(board[a][(boardLength - 1) - a]) == 'x') {
+        if (spotInAntiDiagonal == 'x') {
           xwin = true;
-        } else if (Character.toLowerCase(board[a][(boardLength - 1) - a]) == 'o') {
+        } else if (spotInAntiDiagonal == 'o') {
           owin = true;
         }
       }
@@ -138,12 +142,13 @@ public class TicTacToeBoard {
    */
   private Character columnWin(int columnNumber) {
     for (int row = 0; row < boardLength - 1; row++) {
-      if (Character.toLowerCase(board[columnNumber][row])
-              != Character.toLowerCase(board[columnNumber][row + 1])) {
+      char spotInColumn = board[columnNumber][row];
+      char nextInColumn = board[columnNumber][row + 1];
+      if (spotInColumn != nextInColumn) {
         break;
       }
       if (row == boardLength - 2) {
-        return Character.toLowerCase(board[columnNumber][row]);
+        return spotInColumn;
       }
     }
     return null;
@@ -157,12 +162,13 @@ public class TicTacToeBoard {
    */
   private Character rowWin(int rowNumber) {
     for (int column = 0; column < boardLength - 1; column++) {
-      if (Character.toLowerCase(board[column][rowNumber])
-              != Character.toLowerCase(board[column + 1][rowNumber])) {
+      char spotInRow = board[column][rowNumber];
+      char nextInRow = board[column + 1][rowNumber];
+      if (spotInRow != nextInRow) {
         break;
       }
       if (column == boardLength - 2) {
-        return Character.toLowerCase(board[column][rowNumber]);
+        return spotInRow;
       }
     }
     return null;
