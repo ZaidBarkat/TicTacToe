@@ -12,7 +12,7 @@ public class TicTacToeBoardTest {
 
   @Test
   public void testValidBoardXWins() {
-    TicTacToeBoard board = new TicTacToeBoard("XXXOOO...");
+    TicTacToeBoard board = new TicTacToeBoard("Xo.xO.x..");
     assertEquals(Evaluation.Xwins, board.evaluate());
   }
 
@@ -20,18 +20,6 @@ public class TicTacToeBoardTest {
   public void testValidBoardOWins() {
     TicTacToeBoard board = new TicTacToeBoard("OOOXX.X..");
     assertEquals(Evaluation.Owins, board.evaluate());
-  }
-
-  @Test
-  public void testXGreaterThanThree() {
-    TicTacToeBoard board = new TicTacToeBoard("XXXXXXXXX");
-    assertEquals(Evaluation.UnreachableState, board.evaluate());
-  }
-
-  @Test
-  public void testOGreaterThanThree() {
-    TicTacToeBoard board = new TicTacToeBoard("OOOOOOOOO");
-    assertEquals(Evaluation.UnreachableState, board.evaluate());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -56,15 +44,9 @@ public class TicTacToeBoardTest {
   }
 
   @Test
-  public void testValidFourByFourBoardXWins() {
-    TicTacToeBoard board = new TicTacToeBoard("XXXXoO..o.......");
+  public void testValidFourByFourBoardWin() {
+    TicTacToeBoard board = new TicTacToeBoard("X.O..x.Oo.X....x");
     assertEquals(Evaluation.Xwins, board.evaluate());
-  }
-
-  @Test
-  public void testValidFourByFourBoardOWins() {
-    TicTacToeBoard board = new TicTacToeBoard("OoOoX.Xx........");
-    assertEquals(Evaluation.Owins, board.evaluate());
   }
 
   @Test
@@ -79,5 +61,15 @@ public class TicTacToeBoardTest {
     assertEquals(Evaluation.UnreachableState, board.evaluate());
   }
 
+  @Test
+  public void testValidBoardWinDiagonal() {
+    TicTacToeBoard board = new TicTacToeBoard("X.o.X.o.X");
+    assertEquals(Evaluation.Xwins, board.evaluate());
+  }
 
+  @Test
+  public void testValidBoardWinAntiDiagonal() {
+    TicTacToeBoard board = new TicTacToeBoard("x.o.O.o.X");
+    assertEquals(Evaluation.Owins, board.evaluate());
+  }
 }

@@ -4,7 +4,7 @@ package com.example;
  * Takes in and evaluates a string representing a tic tac toe board.
  */
 public class TicTacToeBoard {
-  /** initial variables */
+  // initial variables
   private char[][] board;
   private int boardLength;
 
@@ -18,14 +18,14 @@ public class TicTacToeBoard {
       throw new IllegalArgumentException();
     }
 
-    /** checking if the given board is a perfect square. */
+    // checking if the given board is a perfect square
     double boardSize = boardPassed.length();
     double boardSquareRoot = Math.sqrt(boardSize);
     if ((boardSquareRoot - Math.floor(boardSquareRoot)) != 0) {
       throw new IllegalArgumentException();
     }
 
-    /** putting characters into two dimensional array */
+    // putting characters into two dimensional array
     board = new char[(int) boardSquareRoot][(int) boardSquareRoot];
     int increment = 0;
     for (int  row = 0; row < board.length; row++) {
@@ -45,43 +45,58 @@ public class TicTacToeBoard {
    * @return an enum value corresponding to the board evaluation
    */
   public Evaluation evaluate() {
-    /** for statement checks if player has won in the horizontal or vertical directions. */
+    // initial local variables created to check for unreachable states
+    boolean xWins = false;
+    boolean oWins = false;
+    int numberOfOs = 0;
+    int numberOfXs = 0;
+
+    // for statement checks if player has won in the horizontal or vertical directions
+    // Also checks for two turns from one player
     for (int i = 0; i < boardLength; i++) {
       Character winnerRow = rowWin(i);
       Character winnerColumn = columnWin(i);
 
       if (winnerRow != null) {
         if (winnerRow == 'x') {
-          return Evaluation.Xwins;
+          xWins = true;
         } else if (winnerRow == 'o') {
-          return Evaluation.Owins;
+          oWins = true;
         }
       }
 
       if (winnerColumn != null) {
         if (winnerColumn == 'x') {
-          return Evaluation.Xwins;
+          xWins = true;
         } else if (winnerColumn == 'o') {
-          return Evaluation.Owins;
+          oWins = true;
+        }
+      }
+
+      for (int j = 0; j < boardLength; j++) {
+        if (Character.toLowerCase(board[i][j]) == 'o') {
+          numberOfOs++;
+        } else if (Character.toLowerCase(board[i][j]) == 'x') {
+          numberOfXs++;
         }
       }
     }
 
-    /** Checks the diagonal for wins */
+    // Checks the diagonal for wins
     for (int d = 0; d < boardLength - 1; d++) {
       if (Character.toLowerCase(board[d][d]) != Character.toLowerCase(board[d + 1][d + 1])) {
         break;
       }
       if (d == boardLength - 2) {
         if (Character.toLowerCase(board[d][d]) == 'x') {
-          return Evaluation.Xwins;
-        } else if(Character.toLowerCase(board[d][d]) == 'o') {
-          return Evaluation.Owins;
+          xWins = true;
+        } else if (Character.toLowerCase(board[d][d]) == 'o') {
+          oWins = true;
         }
       }
     }
 
-    /** checks the anti-diagonal for wins */
+    // checks the anti-diagonal for wins
     for (int a = 0; a < boardLength - 1; a++) {
       if (Character.toLowerCase(board[a][(boardLength - 1) - a])
               != Character.toLowerCase(board[a + 1][(boardLength - 1) - (a + 1)])) {
@@ -89,14 +104,26 @@ public class TicTacToeBoard {
       }
       if (a == boardLength - 2) {
         if (Character.toLowerCase(board[a][(boardLength - 1) - a]) == 'x') {
-          return Evaluation.Xwins;
+          xWins = true;
         } else if (Character.toLowerCase(board[a][(boardLength - 1) - a]) == 'o') {
-          return Evaluation.Owins;
+          oWins = true;
         }
       }
     }
 
-    return Evaluation.UnreachableState;
+    if (Math.abs(numberOfOs - numberOfXs) > 1) {
+      return Evaluation.UnreachableState;
+    }
+
+    if (xWins && oWins) {
+      return Evaluation.UnreachableState;
+    } else if (xWins) {
+      return Evaluation.Xwins;
+    } else if (oWins) {
+      return Evaluation.Owins;
+    }
+
+    return Evaluation.NoWinner;
   }
 
   /**
