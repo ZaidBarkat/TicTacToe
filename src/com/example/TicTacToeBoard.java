@@ -40,10 +40,12 @@ public class TicTacToeBoard {
 
   /**
    * Checks the state of the board (unreachable, no winner, X wins, or O wins).
+   * Uses two helper methods to check horizontal and vertical wins
    *
    * @return an enum value corresponding to the board evaluation
    */
   public Evaluation evaluate() {
+    /** for statement checks if player has won in the horizontal or vertical directions. */
     for (int i = 0; i < boardLength; i++) {
       Character winnerRow = rowWin(i);
       Character winnerColumn = columnWin(i);
@@ -65,6 +67,7 @@ public class TicTacToeBoard {
       }
     }
 
+    /** Checks the diagonal for wins */
     for (int d = 0; d < boardLength - 1; d++) {
       if (Character.toLowerCase(board[d][d]) != Character.toLowerCase(board[d + 1][d + 1])) {
         break;
@@ -78,6 +81,7 @@ public class TicTacToeBoard {
       }
     }
 
+    /** checks the anti-diagonal for wins */
     for (int a = 0; a < boardLength - 1; a++) {
       if (Character.toLowerCase(board[a][(boardLength - 1) - a])
               != Character.toLowerCase(board[a + 1][(boardLength - 1) - (a + 1)])) {
@@ -95,6 +99,12 @@ public class TicTacToeBoard {
     return Evaluation.UnreachableState;
   }
 
+  /**
+   * helper method created to check if a win is in a column.
+   *
+   * @param columnNumber the column being checked through the method
+   * @return a character of the winning player
+   */
   private Character columnWin(int columnNumber) {
     for (int row = 0; row < boardLength - 1; row++) {
       if (Character.toLowerCase(board[columnNumber][row])
@@ -108,6 +118,12 @@ public class TicTacToeBoard {
     return null;
   }
 
+  /**
+   * helper method created to check if a win is in a row.
+   *
+   * @param rowNumber the row being checked through the method
+   * @return a character of the winning player
+   */
   private Character rowWin(int rowNumber) {
     for (int column = 0; column < boardLength - 1; column++) {
       if (Character.toLowerCase(board[column][rowNumber])
