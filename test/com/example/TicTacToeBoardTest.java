@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 public class TicTacToeBoardTest {
   @Test
   public void testValidBoardNoWinner() {
-    TicTacToeBoard board = new TicTacToeBoard("O.^.X.X..");
+    TicTacToeBoard board = new TicTacToeBoard("OoxxX..oO");
     assertEquals(Evaluation.NoWinner, board.evaluate());
   }
 
