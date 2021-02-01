@@ -49,43 +49,44 @@ public class TicTacToeBoard {
       Character winnerColumn = columnWin(i);
 
       if (winnerRow != null) {
-        if (winnerRow == 'x' || winnerRow == 'X') {
+        if (winnerRow == 'x') {
           return Evaluation.Xwins;
-        } else {
+        } else if (winnerRow == 'o') {
           return Evaluation.Owins;
         }
       }
 
       if (winnerColumn != null) {
-        if (winnerColumn == 'x' || winnerColumn == 'X') {
+        if (winnerColumn == 'x') {
           return Evaluation.Xwins;
-        } else {
+        } else if (winnerColumn == 'o') {
           return Evaluation.Owins;
         }
       }
     }
 
     for (int d = 0; d < boardLength - 1; d++) {
-      if (board[d][d] != board[d + 1][d + 1]) {
+      if (Character.toLowerCase(board[d][d]) != Character.toLowerCase(board[d + 1][d + 1])) {
         break;
       }
       if (d == boardLength - 2) {
-        if (board[d][d] == 'x' || board[d][d] == 'X') {
+        if (Character.toLowerCase(board[d][d]) == 'x') {
           return Evaluation.Xwins;
-        } else {
+        } else if(Character.toLowerCase(board[d][d]) == 'o') {
           return Evaluation.Owins;
         }
       }
     }
 
     for (int a = 0; a < boardLength - 1; a++) {
-      if (board[a][(boardLength - 1) - a] != board[a + 1][(boardLength - 1) - (a + 1)]) {
+      if (Character.toLowerCase(board[a][(boardLength - 1) - a])
+              != Character.toLowerCase(board[a + 1][(boardLength - 1) - (a + 1)])) {
         break;
       }
       if (a == boardLength - 2) {
-        if (board[a][(boardLength - 1) - a] == 'x' || board[a][(boardLength - 1) - a] == 'X') {
+        if (Character.toLowerCase(board[a][(boardLength - 1) - a]) == 'x') {
           return Evaluation.Xwins;
-        } else {
+        } else if (Character.toLowerCase(board[a][(boardLength - 1) - a]) == 'o') {
           return Evaluation.Owins;
         }
       }
@@ -96,11 +97,12 @@ public class TicTacToeBoard {
 
   private Character columnWin(int columnNumber) {
     for (int row = 0; row < boardLength - 1; row++) {
-      if (board[columnNumber][row] != board[columnNumber][row + 1]) {
+      if (Character.toLowerCase(board[columnNumber][row])
+              != Character.toLowerCase(board[columnNumber][row + 1])) {
         break;
       }
       if (row == boardLength - 2) {
-        return board[columnNumber][row];
+        return Character.toLowerCase(board[columnNumber][row]);
       }
     }
     return null;
@@ -108,11 +110,12 @@ public class TicTacToeBoard {
 
   private Character rowWin(int rowNumber) {
     for (int column = 0; column < boardLength - 1; column++) {
-      if (board[column][rowNumber] != board[column + 1][rowNumber]) {
+      if (Character.toLowerCase(board[column][rowNumber])
+              != Character.toLowerCase(board[column + 1][rowNumber])) {
         break;
       }
       if (column == boardLength - 2) {
-        return board[column][rowNumber];
+        return Character.toLowerCase(board[column][rowNumber]);
       }
     }
     return null;
