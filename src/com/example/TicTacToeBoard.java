@@ -44,6 +44,64 @@ public class TicTacToeBoard {
    * @return an enum value corresponding to the board evaluation
    */
   public Evaluation evaluate() {
+    for (int i = 0; i < boardLength; i++) {
+      Character winnerRow = rowWin(i);
+      Character winnerColumn = columnWin(i);
+
+      if (winnerRow != null) {
+        if (winnerRow == 'x' || winnerRow == 'X') {
+          return Evaluation.Xwins;
+        } else {
+          return Evaluation.Owins;
+        }
+      }
+
+      if (winnerColumn != null) {
+        if (winnerColumn == 'x' || winnerColumn == 'X') {
+          return Evaluation.Xwins;
+        } else {
+          return Evaluation.Owins;
+        }
+      }
+    }
+
+    for (int d = 0; d < boardLength - 1; d++) {
+      if (board[d][d] != board[d + 1][d + 1]) {
+        break;
+      }
+      if (d == boardLength - 2) {
+        if (board[d][d] == 'x' || board[d][d] == 'X') {
+          return Evaluation.Xwins;
+        } else {
+          return Evaluation.Owins;
+        }
+      }
+    }
+
     return Evaluation.UnreachableState;
+  }
+
+  private Character columnWin(int columnNumber) {
+    for (int row = 0; row < boardLength - 1; row++) {
+      if (board[columnNumber][row] != board[columnNumber][row + 1]) {
+        break;
+      }
+      if (row == boardLength - 2) {
+        return board[columnNumber][row];
+      }
+    }
+    return null;
+  }
+
+  private Character rowWin(int rowNumber) {
+    for (int column = 0; column < boardLength - 1; column++) {
+      if (board[column][rowNumber] != board[column + 1][rowNumber]) {
+        break;
+      }
+      if (column == boardLength - 2) {
+        return board[column][rowNumber];
+      }
+    }
+    return null;
   }
 }
