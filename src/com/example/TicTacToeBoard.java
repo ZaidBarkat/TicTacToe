@@ -46,8 +46,8 @@ public class TicTacToeBoard {
    */
   public Evaluation evaluate() {
     // initial local variables created to check for unreachable states
-    boolean xWins = false;
-    boolean oWins = false;
+    boolean xwin = false;
+    boolean owin = false;
     int numberOfOs = 0;
     int numberOfXs = 0;
 
@@ -59,17 +59,17 @@ public class TicTacToeBoard {
 
       if (winnerRow != null) {
         if (winnerRow == 'x') {
-          xWins = true;
+          xwin = true;
         } else if (winnerRow == 'o') {
-          oWins = true;
+          owin = true;
         }
       }
 
       if (winnerColumn != null) {
         if (winnerColumn == 'x') {
-          xWins = true;
+          xwin = true;
         } else if (winnerColumn == 'o') {
-          oWins = true;
+          owin = true;
         }
       }
 
@@ -89,9 +89,9 @@ public class TicTacToeBoard {
       }
       if (d == boardLength - 2) {
         if (Character.toLowerCase(board[d][d]) == 'x') {
-          xWins = true;
+          xwin = true;
         } else if (Character.toLowerCase(board[d][d]) == 'o') {
-          oWins = true;
+          owin = true;
         }
       }
     }
@@ -104,24 +104,24 @@ public class TicTacToeBoard {
       }
       if (a == boardLength - 2) {
         if (Character.toLowerCase(board[a][(boardLength - 1) - a]) == 'x') {
-          xWins = true;
+          xwin = true;
         } else if (Character.toLowerCase(board[a][(boardLength - 1) - a]) == 'o') {
-          oWins = true;
+          owin = true;
         }
       }
     }
 
-    // checking is player took an extra turn
+    // checking is player took an extra turn or
     if (Math.abs(numberOfOs - numberOfXs) > 1) {
       return Evaluation.UnreachableState;
     }
 
     // checking if two people won, else if some player had won
-    if (xWins && oWins) {
+    if (xwin && owin) {
       return Evaluation.UnreachableState;
-    } else if (xWins) {
+    } else if (xwin) {
       return Evaluation.Xwins;
-    } else if (oWins) {
+    } else if (owin) {
       return Evaluation.Owins;
     }
 
