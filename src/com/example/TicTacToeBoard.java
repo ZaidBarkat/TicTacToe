@@ -112,7 +112,7 @@ public class TicTacToeBoard {
       }
     }
 
-    // checking is player took an extra turn or
+    // checking is player took an extra turn
     if (Math.abs(numberOfOs - numberOfXs) > 1) {
       return Evaluation.UnreachableState;
     }
